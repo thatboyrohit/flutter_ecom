@@ -25,7 +25,7 @@ productRouter.get('/api/products/search/:name' ,auth, async(req , res) =>{
     }
     });
 
-    productRouter.post('api/rate-product' , auth , async(req , res) =>{
+    productRouter.post('/api/rate-product' , auth , async(req , res) =>{
         try{
             const {id , rating} = req.body;
             let product = await Product.findById(id);
@@ -51,7 +51,7 @@ productRouter.get('/api/products/search/:name' ,auth, async(req , res) =>{
             }
     });
 
-    productRouter.get('api/deal-0f-day' , auth , async(req , res) =>{
+    productRouter.get('/api/deal-0f-day' , auth , async(req , res) =>{
         try{
            let products = await Product.find({});
             

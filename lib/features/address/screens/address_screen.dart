@@ -6,7 +6,7 @@ import 'package:ecom_app/constants/global_variables.dart';
 import 'package:ecom_app/features/payment/payment_config.dart';
 import 'package:ecom_app/providers/user_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:pay/pay.dart';
+//import 'package:pay/pay.dart';
 import 'package:provider/provider.dart';
 
 class AddressScreen extends StatefulWidget {
@@ -24,7 +24,7 @@ class _AddressScreenState extends State<AddressScreen> {
   final TextEditingController cityController = TextEditingController();
   final _addressFormKey = GlobalKey<FormState>();
 
-  List<PaymentItem> paymentItems = [];
+ // List<PaymentItem> paymentItems = [];
 
   @override
   void dispose() {
@@ -127,7 +127,6 @@ class _AddressScreenState extends State<AddressScreen> {
                   ],
                 ),
               ),
-              
               
             ],
           ),

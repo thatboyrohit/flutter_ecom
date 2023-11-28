@@ -1,4 +1,4 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
+
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:ecom_app/common/widgets/custom_button.dart';
 import 'package:ecom_app/common/widgets/stars.dart';
