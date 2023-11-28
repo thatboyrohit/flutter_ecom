@@ -10,6 +10,7 @@ class UserProvider extends ChangeNotifier {
     address: '',
     type: '',
     token: '',
+    cart: [],
   );
 
   User get user => _user;
@@ -20,12 +21,15 @@ class UserProvider extends ChangeNotifier {
         _user = User.fromJson(userData);
         notifyListeners();
       } catch (e) {
-        // Handle JSON parsing error
         print('Error parsing user data: $e');
       }
     } else {
-      // Handle null userData
       print('User data is null');
     }
+  }
+
+  void setUserFromModel(User user) {
+    _user = user;
+    notifyListeners();
   }
 }

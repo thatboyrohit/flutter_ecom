@@ -13,7 +13,7 @@ void main() {
     ChangeNotifierProvider(
       create: (context) => UserProvider(),
     ),
-  ], child: const MyApp()));
+  ], child:  MyApp()));
 }
 
 class MyApp extends StatefulWidget {

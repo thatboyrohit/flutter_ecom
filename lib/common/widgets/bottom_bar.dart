@@ -1,8 +1,11 @@
 import 'package:ecom_app/constants/global_variables.dart';
 import 'package:ecom_app/features/account/screens/account_screen.dart';
+import 'package:ecom_app/features/cart/screen/cart_screen.dart';
 import 'package:ecom_app/features/home/screens/home_screen.dart';
+import 'package:ecom_app/providers/user_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:badges/badges.dart';
+import 'package:provider/provider.dart';
+import 'package:badges/badges.dart' as badge;
 
 class BottomBar extends StatefulWidget {
   static const String routeName = '/actual-home';
@@ -20,9 +23,7 @@ class _BottomBarState extends State<BottomBar> {
   List<Widget> pages = [
     const HomeScreen(),
     const AccountScreen(),
-    const Center(
-      child: Text('Cart page'),
-    ),
+    const CartScreen(),
   ];
 
   void updatePage(int page) {
@@ -32,6 +33,7 @@ class _BottomBarState extends State<BottomBar> {
 
   @override
   Widget build(BuildContext context) {
+    final userCartLen = context.watch<UserProvider>().user.cart.length;
     return Scaffold(
       body: pages[_page],
       bottomNavigationBar: BottomNavigationBar(
@@ -92,8 +94,9 @@ class _BottomBarState extends State<BottomBar> {
                   ),
                 ),
               ),
-              child: const Icon(
-                Icons.shopping_cart_outlined,
+              child: badge.Badge(
+                badgeContent: Text(userCartLen.toString()),
+                child: const Icon(Icons.shopping_cart_outlined),
               ),
             ),
             label: '',

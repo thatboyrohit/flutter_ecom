@@ -3,6 +3,9 @@ const mongoose = require("mongoose");
 
 
 const authRouter = require('./routes/auth');
+const adminRouter = require('./routes/admin');
+const productRouter = require('./routes/product');
+const userRouter = require('./routes/user');
 
 
 
@@ -15,6 +18,9 @@ const DB = "mongodb+srv://thatboyrohit:foobarbaz@cluster0.w8cpptu.mongodb.net/?r
 //middleware
 app.use(express.json()); //allows us to parse incoming requests with JSON payloads
 app.use(authRouter);
+app.use(adminRouter);
+app.use(productRouter);
+app.use(userRouter);
 
 
 //connections
