@@ -10,7 +10,6 @@ import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 
 class ProductDetailsServices {
-
   void addToCart({
     required BuildContext context,
     required Product product,
@@ -18,7 +17,7 @@ class ProductDetailsServices {
     final userProvider = Provider.of<UserProvider>(context, listen: false);
     try {
       http.Response res = await http.post(
-        Uri.parse('$uri/api/rate-product'),
+        Uri.parse('$uri/api/add-to-cart'),
         headers: {
           'Content-Type': 'application/json; charset=UTF-8',
           'x-auth-token': userProvider.user.token,
@@ -30,9 +29,7 @@ class ProductDetailsServices {
       httpErrorHandle(
         response: res,
         context: context,
-        onSuccess: () {
-         
-        },
+        onSuccess: () {},
       );
     } catch (e) {
       showSnackBar(
@@ -41,6 +38,7 @@ class ProductDetailsServices {
       );
     }
   }
+
   Future<void> rateProduct({
     required BuildContext context,
     required Product product,

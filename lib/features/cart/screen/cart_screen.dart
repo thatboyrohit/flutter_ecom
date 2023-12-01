@@ -4,6 +4,8 @@ import 'package:ecom_app/features/address/screens/address_screen.dart';
 import 'package:ecom_app/features/cart/widgets/cart_product.dart';
 import 'package:ecom_app/features/cart/widgets/cart_subtotal.dart';
 import 'package:ecom_app/features/home/widgets/address_box.dart';
+import 'package:ecom_app/features/product_details/screen/product_details_screen.dart';
+import 'package:ecom_app/models/product.dart';
 import 'package:ecom_app/providers/user_provider.dart';
 import 'package:ecom_app/search/screens/search_screen.dart';
 import 'package:flutter/material.dart';
@@ -17,17 +19,28 @@ class CartScreen extends StatefulWidget {
 }
 
 class _CartScreenState extends State<CartScreen> {
+  List<Product>? products;
+  List<Product>? product;
+
   void navigateToSearchScreen(String query) {
     Navigator.pushNamed(context, SearchScreen.routeName, arguments: query);
   }
 
-  void navigateToAddress() {
-    Navigator.pushNamed(context, AddressScreen.routeName);
+  void navigateToAddress(int sum) {
+    Navigator.pushNamed(
+      context,
+      AddressScreen.routeName,
+      arguments: sum.toString(),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     final user = context.watch<UserProvider>().user;
+    int sum = 0;
+    user.cart
+        .map((e) => sum += e['quantity'] * e['product']['price'] as int)
+        .toList();
 
     return Scaffold(
       appBar: PreferredSize(
@@ -110,7 +123,7 @@ class _CartScreenState extends State<CartScreen> {
               padding: const EdgeInsets.all(8.0),
               child: CustomButton(
                 text: 'Proceed to Buy (${user.cart.length}) items',
-                onTap: navigateToAddress,
+                onTap: () => navigateToAddress(sum),
                 color: Colors.yellow[600],
               ),
             ),
@@ -128,7 +141,13 @@ class _CartScreenState extends State<CartScreen> {
                 itemCount: user.cart.length,
                 shrinkWrap: true,
                 itemBuilder: (context, index) {
-                  return CartProduct(index: index);
+                  return GestureDetector(
+                      onTap: () {
+                        Navigator.pushNamed(
+                            context, ProductDetailScreen.routeName,
+                            arguments: product![index]);
+                      },
+                      child: CartProduct(index: index));
                 })
           ],
         ),

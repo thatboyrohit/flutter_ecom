@@ -1,4 +1,5 @@
 import 'package:ecom_app/constants/global_variables.dart';
+import 'package:ecom_app/features/admin/screens/orders_screen.dart';
 import 'package:ecom_app/features/admin/screens/posts_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -19,9 +20,7 @@ class _AdminScreenState extends State<AdminScreen> {
     const Center(
       child: Text('Post page'),
     ),
-    const Center(
-      child: Text('Analytics page'),
-    ),
+     const OrdersScreen(),
     const Center(
       child: Text('Cart page'),
     ),

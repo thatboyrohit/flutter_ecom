@@ -1,3 +1,4 @@
+import 'package:ecom_app/features/account/services/account_services.dart';
 import 'package:ecom_app/features/account/widgets/account_button.dart';
 import 'package:flutter/material.dart';
 
@@ -12,7 +13,9 @@ class TopButtons extends StatelessWidget {
           children: [
             AccountButton(
               text: 'Your Orders',
-              onTap: () {},
+              onTap: () {
+          
+              },
             ),
             AccountButton(
               text: 'Turn Seller',
@@ -25,7 +28,7 @@ class TopButtons extends StatelessWidget {
           children: [
             AccountButton(
               text: 'Log Out',
-              onTap: () {} //=> AccountServices().logOut(context),
+              onTap: () => AccountService().logOut(context),
             ),
             AccountButton(
               text: 'Your Wish List',

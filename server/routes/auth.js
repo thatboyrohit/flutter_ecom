@@ -7,6 +7,7 @@ const auth = require("../middlewares/auth");
 const authRouter  = express.Router();
 
 authRouter.post('/api/signup' , async (req , res) =>{
+  console.log('hello');
 try{
   const {name , email , password} = req.body;
    
@@ -64,7 +65,7 @@ try{
 
      res.json(true);
     }catch(e){
-      res.status(500).json({error: error.message});
+      res.status(500).json({error: e.message});
     }
   });
   //get user data

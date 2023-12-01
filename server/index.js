@@ -1,5 +1,6 @@
 const express = require('express');
 const mongoose = require("mongoose");
+require('dotenv').config();
 
 
 const authRouter = require('./routes/auth');
@@ -10,13 +11,13 @@ const userRouter = require('./routes/user');
 
 
 //INIT
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 const app = express();
-const DB = "mongodb+srv://thatboyrohit:foobarbaz@cluster0.w8cpptu.mongodb.net/?retryWrites=true&w=majority";
+const DB_CONNECTION_STRING = process.env.DB_CONNECTION_STRING;
 
 
 //middleware
-app.use(express.json()); //allows us to parse incoming requests with JSON payloads
+app.use(express.json()); 
 app.use(authRouter);
 app.use(adminRouter);
 app.use(productRouter);
@@ -24,7 +25,7 @@ app.use(userRouter);
 
 
 //connections
-mongoose.connect(DB).then(()=>{
+mongoose.connect(DB_CONNECTION_STRING).then(()=>{
     console.log('Connection Successful');
 })
 .catch((e) =>{

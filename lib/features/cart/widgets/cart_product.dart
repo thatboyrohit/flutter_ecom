@@ -78,10 +78,12 @@ class _CartProductState extends State<CartProduct> {
                       ),
                       maxLines: 2,
                     ),
+                  
                   ),
                   const SizedBox(
                     height: 25,
-                  )
+                  ),
+
                 ],
               ),
             ],
