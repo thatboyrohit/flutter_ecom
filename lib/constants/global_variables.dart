@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-String uri = 'http://172.20.10.9:3000';
+String uri = 'https://my-ecom-app.onrender.com';
 
 class GlobalVariables {
   // COLORS

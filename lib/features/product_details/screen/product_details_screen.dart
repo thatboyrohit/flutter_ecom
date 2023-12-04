@@ -1,4 +1,3 @@
-
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:ecom_app/common/widgets/custom_button.dart';
 import 'package:ecom_app/common/widgets/stars.dart';
@@ -53,6 +52,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
 
   void addToCart() {
     productDetailsServices.addToCart(context: context, product: widget.product);
+    setState(() {});
   }
 
   @override
@@ -147,9 +147,8 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
               padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
               child: Text(
                 widget.product.name,
-                style: const TextStyle(
-                  fontSize: 15,
-                ),
+                style:
+                    const TextStyle(fontSize: 15, fontWeight: FontWeight.w500),
               ),
             ),
             CarouselSlider(
