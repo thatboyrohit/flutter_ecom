@@ -12,21 +12,18 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class CartScreen extends StatefulWidget {
-  const CartScreen({super.key});
+  const CartScreen({Key? key}) : super(key: key);
 
   @override
   State<CartScreen> createState() => _CartScreenState();
 }
 
 class _CartScreenState extends State<CartScreen> {
-  List<Product>? products;
-  List<Product>? product;
-
   void navigateToSearchScreen(String query) {
     Navigator.pushNamed(context, SearchScreen.routeName, arguments: query);
   }
 
-  void navigateToAddress(int sum) {
+  void navigateToAddress(double sum) {
     Navigator.pushNamed(
       context,
       AddressScreen.routeName,
@@ -37,9 +34,9 @@ class _CartScreenState extends State<CartScreen> {
   @override
   Widget build(BuildContext context) {
     final user = context.watch<UserProvider>().user;
-    int sum = 0;
+    double sum = 0;
     user.cart
-        .map((e) => sum += e['quantity'] * e['product']['price'] as int)
+        .map((e) => sum += e['quantity'] * e['product']['price'] as num)
         .toList();
 
     return Scaffold(
@@ -64,38 +61,43 @@ class _CartScreenState extends State<CartScreen> {
                     child: TextFormField(
                       onFieldSubmitted: navigateToSearchScreen,
                       decoration: InputDecoration(
-                          prefixIcon: InkWell(
-                            onTap: () {},
-                            child: const Padding(
-                              padding: EdgeInsets.only(left: 6),
-                              child: Icon(
-                                Icons.search,
-                                color: Colors.black,
-                                size: 23,
-                              ),
+                        prefixIcon: InkWell(
+                          onTap: () {},
+                          child: const Padding(
+                            padding: EdgeInsets.only(
+                              left: 6,
+                            ),
+                            child: Icon(
+                              Icons.search,
+                              color: Colors.black,
+                              size: 23,
                             ),
                           ),
-                          fillColor: Colors.white,
-                          filled: true,
-                          contentPadding: const EdgeInsets.only(top: 10),
-                          border: const OutlineInputBorder(
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(7),
-                            ),
-                            borderSide: BorderSide.none,
+                        ),
+                        filled: true,
+                        fillColor: Colors.white,
+                        contentPadding: const EdgeInsets.only(top: 10),
+                        border: const OutlineInputBorder(
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(7),
                           ),
-                          enabledBorder: const OutlineInputBorder(
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(7),
-                            ),
-                            borderSide:
-                                BorderSide(color: Colors.black38, width: 1),
+                          borderSide: BorderSide.none,
+                        ),
+                        enabledBorder: const OutlineInputBorder(
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(7),
                           ),
-                          hintText: 'Search Amazon.in',
-                          hintStyle: const TextStyle(
-                            fontWeight: FontWeight.w500,
-                            fontSize: 17,
-                          )),
+                          borderSide: BorderSide(
+                            color: Colors.black38,
+                            width: 1,
+                          ),
+                        ),
+                        hintText: 'Search Amazon.in',
+                        hintStyle: const TextStyle(
+                          fontWeight: FontWeight.w500,
+                          fontSize: 17,
+                        ),
+                      ),
                     ),
                   ),
                 ),
@@ -104,12 +106,8 @@ class _CartScreenState extends State<CartScreen> {
                 color: Colors.transparent,
                 height: 42,
                 margin: const EdgeInsets.symmetric(horizontal: 10),
-                child: const Icon(
-                  Icons.mic,
-                  color: Colors.black,
-                  size: 25,
-                ),
-              )
+                child: const Icon(Icons.mic, color: Colors.black, size: 25),
+              ),
             ],
           ),
         ),
@@ -122,33 +120,26 @@ class _CartScreenState extends State<CartScreen> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: CustomButton(
-                text: 'Proceed to Buy (${user.cart.length}) items',
+                text: 'Proceed to Buy (${user.cart.length} items)',
                 onTap: () => navigateToAddress(sum),
                 color: Colors.yellow[600],
               ),
             ),
-            const SizedBox(
-              height: 15,
-            ),
+            const SizedBox(height: 15),
             Container(
               color: Colors.black12.withOpacity(0.08),
               height: 1,
             ),
-            const SizedBox(
-              height: 5,
-            ),
+            const SizedBox(height: 5),
             ListView.builder(
-                itemCount: user.cart.length,
-                shrinkWrap: true,
-                itemBuilder: (context, index) {
-                  return GestureDetector(
-                      onTap: () {
-                        Navigator.pushNamed(
-                            context, ProductDetailScreen.routeName,
-                            arguments: product![index]);
-                      },
-                      child: CartProduct(index: index));
-                })
+              itemCount: user.cart.length,
+              shrinkWrap: true,
+              itemBuilder: (context, index) {
+                return CartProduct(
+                  index: index,
+                );
+              },
+            ),
           ],
         ),
       ),
